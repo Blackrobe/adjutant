@@ -1,0 +1,3 @@
+# Build output: rebuild with build.cmd (quit the Adjutant first; the running exe is locked).
+adjutant.exe
+__pycache__/
