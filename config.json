@@ -1,0 +1,13 @@
+{
+  "port": 47777,
+  "skin": "atom",
+  "size": 160,
+  "fps": 24,
+  "dimOpacity": 0.2,
+  "pollSeconds": 2,
+  "bubbleSeconds": 8,
+  "overrideSeconds": 8,
+  "hitZone": 0.4,
+  "terminalTitleRegex": ".",
+  "speeds": { "Idle": 1.0, "Busy": 2.5, "Attention": 1.5, "Done": 1.0, "Error": 0.6 }
+}

@@ -1,0 +1,170 @@
+<!--
+  Default Adjutant skin: a glowing atom (nucleus + three electrons on tilting orbit planes).
+  Placeholder art by Claude; see ../../SKIN-CONTRACT.md for the rules a skin must follow.
+-->
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Width="256" Height="256">
+  <Grid.Resources>
+    <RadialGradientBrush x:Key="ElectronFill">
+      <GradientStop Color="#FFFFFFFF" Offset="0"/>
+      <GradientStop x:Name="ElectronTint" Color="#FF9DFFE8" Offset="0.45"/>
+      <GradientStop Color="#0039FF14" Offset="1"/>
+    </RadialGradientBrush>
+
+    <!-- Runs for the whole life of the skin; the host scales its speed per state. -->
+    <Storyboard x:Key="Motion">
+      <DoubleAnimation Storyboard.TargetName="Spin1" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:2" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Spin2" Storyboard.TargetProperty="Angle" From="120" To="480" Duration="0:0:2.4" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Spin3" Storyboard.TargetProperty="Angle" From="240" To="600" Duration="0:0:1.8" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Tilt1" Storyboard.TargetProperty="ScaleY" From="0.12" To="0.95" Duration="0:0:3" AutoReverse="True" RepeatBehavior="Forever">
+        <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+      <DoubleAnimation Storyboard.TargetName="Tilt2" Storyboard.TargetProperty="ScaleY" From="0.95" To="0.12" Duration="0:0:3.7" AutoReverse="True" RepeatBehavior="Forever">
+        <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+      <DoubleAnimation Storyboard.TargetName="Tilt3" Storyboard.TargetProperty="ScaleY" From="0.4" To="0.9" Duration="0:0:4.3" AutoReverse="True" RepeatBehavior="Forever">
+        <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+      <DoubleAnimation Storyboard.TargetName="Plane1" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:24" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Plane2" Storyboard.TargetProperty="Angle" From="60" To="420" Duration="0:0:24" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Plane3" Storyboard.TargetProperty="Angle" From="120" To="480" Duration="0:0:24" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="CoreScale" Storyboard.TargetProperty="ScaleX" From="1" To="1.12" Duration="0:0:1.2" AutoReverse="True" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="CoreScale" Storyboard.TargetProperty="ScaleY" From="1" To="1.12" Duration="0:0:1.2" AutoReverse="True" RepeatBehavior="Forever"/>
+    </Storyboard>
+
+    <!-- State storyboards: Idle has none (base colours). -->
+    <Storyboard x:Key="Busy">
+      <ColorAnimation Storyboard.TargetName="Ring1" Storyboard.TargetProperty="Color" To="#FF2F6BFF" Duration="0:0:0.4"/>
+      <ColorAnimation Storyboard.TargetName="Ring2" Storyboard.TargetProperty="Color" To="#FF2F6BFF" Duration="0:0:0.4"/>
+      <ColorAnimation Storyboard.TargetName="Ring3" Storyboard.TargetProperty="Color" To="#FF2F6BFF" Duration="0:0:0.4"/>
+      <ColorAnimation Storyboard.TargetName="Glow" Storyboard.TargetProperty="Color" To="#FF2F6BFF" Duration="0:0:0.4"/>
+      <ColorAnimation Storyboard.TargetName="CoreStop" Storyboard.TargetProperty="Color" To="#FF2F6BFF" Duration="0:0:0.4"/>
+      <ColorAnimation Storyboard.TargetName="CoreLight" Storyboard.TargetProperty="Color" To="#FFC2D5FF" Duration="0:0:0.4"/>
+      <ColorAnimation Storyboard.TargetName="CoreRing" Storyboard.TargetProperty="Color" To="#FF1E3F99" Duration="0:0:0.4"/>
+      <ColorAnimation Storyboard.TargetName="ElectronTint" Storyboard.TargetProperty="Color" To="#FF8FB4FF" Duration="0:0:0.4"/>
+      <DoubleAnimation Storyboard.TargetName="Glow" Storyboard.TargetProperty="BlurRadius" To="28" Duration="0:0:0.4"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Attention">
+      <ColorAnimation Storyboard.TargetName="Ring1" Storyboard.TargetProperty="Color" From="#FFFFC940" To="#FFFFE28A" Duration="0:0:0.6" AutoReverse="True" RepeatBehavior="Forever"/>
+      <ColorAnimation Storyboard.TargetName="Ring2" Storyboard.TargetProperty="Color" From="#FFFFC940" To="#FFFFE28A" Duration="0:0:0.6" AutoReverse="True" RepeatBehavior="Forever"/>
+      <ColorAnimation Storyboard.TargetName="Ring3" Storyboard.TargetProperty="Color" From="#FFFFC940" To="#FFFFE28A" Duration="0:0:0.6" AutoReverse="True" RepeatBehavior="Forever"/>
+      <ColorAnimation Storyboard.TargetName="Glow" Storyboard.TargetProperty="Color" From="#FFFFC940" To="#FFFFE28A" Duration="0:0:0.6" AutoReverse="True" RepeatBehavior="Forever"/>
+      <ColorAnimation Storyboard.TargetName="CoreStop" Storyboard.TargetProperty="Color" To="#FFFFCD55" Duration="0:0:0.3"/>
+      <ColorAnimation Storyboard.TargetName="CoreLight" Storyboard.TargetProperty="Color" To="#FFFFEEC6" Duration="0:0:0.3"/>
+      <ColorAnimation Storyboard.TargetName="CoreRing" Storyboard.TargetProperty="Color" To="#FFAD862D" Duration="0:0:0.3"/>
+      <ColorAnimation Storyboard.TargetName="ElectronTint" Storyboard.TargetProperty="Color" To="#FFFFE7A8" Duration="0:0:0.3"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Done">
+      <ColorAnimation Storyboard.TargetName="Ring1" Storyboard.TargetProperty="Color" To="#FF3BD5FF" Duration="0:0:0.5"/>
+      <ColorAnimation Storyboard.TargetName="Ring2" Storyboard.TargetProperty="Color" To="#FF3BD5FF" Duration="0:0:0.5"/>
+      <ColorAnimation Storyboard.TargetName="Ring3" Storyboard.TargetProperty="Color" To="#FF3BD5FF" Duration="0:0:0.5"/>
+      <ColorAnimation Storyboard.TargetName="Glow" Storyboard.TargetProperty="Color" To="#FF3BD5FF" Duration="0:0:0.5"/>
+      <ColorAnimation Storyboard.TargetName="CoreStop" Storyboard.TargetProperty="Color" To="#FF3BD5FF" Duration="0:0:0.5"/>
+      <ColorAnimation Storyboard.TargetName="CoreLight" Storyboard.TargetProperty="Color" To="#FFDEF7FF" Duration="0:0:0.5"/>
+      <ColorAnimation Storyboard.TargetName="CoreRing" Storyboard.TargetProperty="Color" To="#FF2F7890" Duration="0:0:0.5"/>
+      <ColorAnimation Storyboard.TargetName="ElectronTint" Storyboard.TargetProperty="Color" To="#FFB8F1FF" Duration="0:0:0.5"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Error">
+      <ColorAnimation Storyboard.TargetName="Ring1" Storyboard.TargetProperty="Color" To="#FFFF3B3B" Duration="0:0:0.3"/>
+      <ColorAnimation Storyboard.TargetName="Ring2" Storyboard.TargetProperty="Color" To="#FFFF3B3B" Duration="0:0:0.3"/>
+      <ColorAnimation Storyboard.TargetName="Ring3" Storyboard.TargetProperty="Color" To="#FFFF3B3B" Duration="0:0:0.3"/>
+      <ColorAnimation Storyboard.TargetName="Glow" Storyboard.TargetProperty="Color" To="#FFFF3B3B" Duration="0:0:0.3"/>
+      <ColorAnimation Storyboard.TargetName="CoreStop" Storyboard.TargetProperty="Color" To="#FFFF3B3B" Duration="0:0:0.3"/>
+      <ColorAnimation Storyboard.TargetName="CoreLight" Storyboard.TargetProperty="Color" To="#FFFFDFE3" Duration="0:0:0.3"/>
+      <ColorAnimation Storyboard.TargetName="CoreRing" Storyboard.TargetProperty="Color" To="#FF91333D" Duration="0:0:0.3"/>
+      <ColorAnimation Storyboard.TargetName="ElectronTint" Storyboard.TargetProperty="Color" To="#FFFFA5A5" Duration="0:0:0.3"/>
+    </Storyboard>
+
+    <!-- One-shot flash whenever a message arrives. Touches only the halo, so it never fights the state storyboards. -->
+    <Storyboard x:Key="Ping">
+      <DoubleAnimation Storyboard.TargetName="Halo" Storyboard.TargetProperty="Opacity" From="0.9" To="0" Duration="0:0:0.7"/>
+      <DoubleAnimation Storyboard.TargetName="HaloScale" Storyboard.TargetProperty="ScaleX" From="1" To="3.2" Duration="0:0:0.7"/>
+      <DoubleAnimation Storyboard.TargetName="HaloScale" Storyboard.TargetProperty="ScaleY" From="1" To="3.2" Duration="0:0:0.7"/>
+    </Storyboard>
+  </Grid.Resources>
+
+  <Canvas Width="256" Height="256">
+    <Canvas.Effect>
+      <DropShadowEffect x:Name="Glow" Color="#FF39FF14" BlurRadius="18" ShadowDepth="0" Opacity="1"/>
+    </Canvas.Effect>
+
+    <Ellipse x:Name="Halo" Canvas.Left="98" Canvas.Top="98" Width="60" Height="60" Opacity="0" StrokeThickness="3" Stroke="#FFF5F7FA">
+      <Ellipse.RenderTransform>
+        <ScaleTransform x:Name="HaloScale" CenterX="30" CenterY="30"/>
+      </Ellipse.RenderTransform>
+    </Ellipse>
+
+    <Ellipse Canvas.Left="78" Canvas.Top="78" Width="100" Height="100" StrokeThickness="3">
+      <Ellipse.Stroke><SolidColorBrush x:Name="CoreRing" Color="#FF1F7A3A"/></Ellipse.Stroke>
+    </Ellipse>
+
+    <Ellipse x:Name="Core" Canvas.Left="106" Canvas.Top="106" Width="44" Height="44">
+      <Ellipse.Fill>
+        <RadialGradientBrush>
+          <GradientStop Color="#FFFFFFFF" Offset="0"/>
+          <GradientStop x:Name="CoreLight" Color="#FF7DFFE0" Offset="0.35"/>
+          <GradientStop x:Name="CoreStop" Color="#FF39FF14" Offset="0.7"/>
+          <GradientStop Color="#0039FF14" Offset="1"/>
+        </RadialGradientBrush>
+      </Ellipse.Fill>
+      <Ellipse.RenderTransform>
+        <ScaleTransform x:Name="CoreScale" CenterX="22" CenterY="22"/>
+      </Ellipse.RenderTransform>
+    </Ellipse>
+
+    <!-- Orbit 1 -->
+    <Canvas Width="256" Height="256">
+      <Canvas.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform x:Name="Tilt1" CenterX="128" CenterY="128" ScaleY="0.12"/>
+          <RotateTransform x:Name="Plane1" CenterX="128" CenterY="128" Angle="0"/>
+        </TransformGroup>
+      </Canvas.RenderTransform>
+      <Ellipse Canvas.Left="18" Canvas.Top="18" Width="220" Height="220" StrokeThickness="3">
+        <Ellipse.Stroke><SolidColorBrush x:Name="Ring1" Color="#FF39FF14"/></Ellipse.Stroke>
+      </Ellipse>
+      <Canvas Width="256" Height="256">
+        <Canvas.RenderTransform><RotateTransform x:Name="Spin1" CenterX="128" CenterY="128"/></Canvas.RenderTransform>
+        <Ellipse Canvas.Left="229" Canvas.Top="119" Width="18" Height="18" Fill="{StaticResource ElectronFill}"/>
+      </Canvas>
+    </Canvas>
+
+    <!-- Orbit 2 -->
+    <Canvas Width="256" Height="256">
+      <Canvas.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform x:Name="Tilt2" CenterX="128" CenterY="128" ScaleY="0.95"/>
+          <RotateTransform x:Name="Plane2" CenterX="128" CenterY="128" Angle="60"/>
+        </TransformGroup>
+      </Canvas.RenderTransform>
+      <Ellipse Canvas.Left="18" Canvas.Top="18" Width="220" Height="220" StrokeThickness="3">
+        <Ellipse.Stroke><SolidColorBrush x:Name="Ring2" Color="#FF39FF14"/></Ellipse.Stroke>
+      </Ellipse>
+      <Canvas Width="256" Height="256">
+        <Canvas.RenderTransform><RotateTransform x:Name="Spin2" CenterX="128" CenterY="128"/></Canvas.RenderTransform>
+        <Ellipse Canvas.Left="229" Canvas.Top="119" Width="18" Height="18" Fill="{StaticResource ElectronFill}"/>
+      </Canvas>
+    </Canvas>
+
+    <!-- Orbit 3 -->
+    <Canvas Width="256" Height="256">
+      <Canvas.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform x:Name="Tilt3" CenterX="128" CenterY="128" ScaleY="0.4"/>
+          <RotateTransform x:Name="Plane3" CenterX="128" CenterY="128" Angle="120"/>
+        </TransformGroup>
+      </Canvas.RenderTransform>
+      <Ellipse Canvas.Left="18" Canvas.Top="18" Width="220" Height="220" StrokeThickness="3">
+        <Ellipse.Stroke><SolidColorBrush x:Name="Ring3" Color="#FF39FF14"/></Ellipse.Stroke>
+      </Ellipse>
+      <Canvas Width="256" Height="256">
+        <Canvas.RenderTransform><RotateTransform x:Name="Spin3" CenterX="128" CenterY="128"/></Canvas.RenderTransform>
+        <Ellipse Canvas.Left="229" Canvas.Top="119" Width="18" Height="18" Fill="{StaticResource ElectronFill}"/>
+      </Canvas>
+    </Canvas>
+  </Canvas>
+</Grid>
