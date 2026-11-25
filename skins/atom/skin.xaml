@@ -14,16 +14,17 @@
 
     <!-- Runs for the whole life of the skin; the host scales its speed per state. -->
     <Storyboard x:Key="Motion">
-      <DoubleAnimation Storyboard.TargetName="Spin1" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:2" RepeatBehavior="Forever"/>
-      <DoubleAnimation Storyboard.TargetName="Spin2" Storyboard.TargetProperty="Angle" From="120" To="480" Duration="0:0:2.4" RepeatBehavior="Forever"/>
-      <DoubleAnimation Storyboard.TargetName="Spin3" Storyboard.TargetProperty="Angle" From="240" To="600" Duration="0:0:1.8" RepeatBehavior="Forever"/>
+      <!-- A half-turn on the second plane keeps the projected heads 120 degrees apart. -->
+      <DoubleAnimation Storyboard.TargetName="Spin1" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:4.2" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Spin2" Storyboard.TargetProperty="Angle" From="180" To="540" Duration="0:0:4.2" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Spin3" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:4.2" RepeatBehavior="Forever"/>
       <DoubleAnimation Storyboard.TargetName="Tilt1" Storyboard.TargetProperty="ScaleY" From="0.12" To="0.95" Duration="0:0:3" AutoReverse="True" RepeatBehavior="Forever">
         <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
       </DoubleAnimation>
-      <DoubleAnimation Storyboard.TargetName="Tilt2" Storyboard.TargetProperty="ScaleY" From="0.95" To="0.12" Duration="0:0:3.7" AutoReverse="True" RepeatBehavior="Forever">
+      <DoubleAnimation Storyboard.TargetName="Tilt2" Storyboard.TargetProperty="ScaleY" From="0.12" To="0.95" Duration="0:0:3" AutoReverse="True" RepeatBehavior="Forever">
         <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
       </DoubleAnimation>
-      <DoubleAnimation Storyboard.TargetName="Tilt3" Storyboard.TargetProperty="ScaleY" From="0.4" To="0.9" Duration="0:0:4.3" AutoReverse="True" RepeatBehavior="Forever">
+      <DoubleAnimation Storyboard.TargetName="Tilt3" Storyboard.TargetProperty="ScaleY" From="0.12" To="0.95" Duration="0:0:3" AutoReverse="True" RepeatBehavior="Forever">
         <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
       </DoubleAnimation>
       <DoubleAnimation Storyboard.TargetName="Plane1" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:24" RepeatBehavior="Forever"/>
@@ -137,7 +138,7 @@
     <Canvas Width="256" Height="256">
       <Canvas.RenderTransform>
         <TransformGroup>
-          <ScaleTransform x:Name="Tilt2" CenterX="128" CenterY="128" ScaleY="0.95"/>
+          <ScaleTransform x:Name="Tilt2" CenterX="128" CenterY="128" ScaleY="0.12"/>
           <RotateTransform x:Name="Plane2" CenterX="128" CenterY="128" Angle="60"/>
         </TransformGroup>
       </Canvas.RenderTransform>
@@ -145,7 +146,7 @@
         <Ellipse.Stroke><SolidColorBrush x:Name="Ring2" Color="#FF39FF14"/></Ellipse.Stroke>
       </Ellipse>
       <Canvas Width="256" Height="256">
-        <Canvas.RenderTransform><RotateTransform x:Name="Spin2" CenterX="128" CenterY="128"/></Canvas.RenderTransform>
+        <Canvas.RenderTransform><RotateTransform x:Name="Spin2" CenterX="128" CenterY="128" Angle="180"/></Canvas.RenderTransform>
         <Ellipse Canvas.Left="229" Canvas.Top="119" Width="18" Height="18" Fill="{StaticResource ElectronFill}"/>
       </Canvas>
     </Canvas>
@@ -154,7 +155,7 @@
     <Canvas Width="256" Height="256">
       <Canvas.RenderTransform>
         <TransformGroup>
-          <ScaleTransform x:Name="Tilt3" CenterX="128" CenterY="128" ScaleY="0.4"/>
+          <ScaleTransform x:Name="Tilt3" CenterX="128" CenterY="128" ScaleY="0.12"/>
           <RotateTransform x:Name="Plane3" CenterX="128" CenterY="128" Angle="120"/>
         </TransformGroup>
       </Canvas.RenderTransform>
